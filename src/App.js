@@ -5,12 +5,18 @@ import MenuComponentWithProps from './components/menu/MenuComponentWithProps.js'
 import GreetClassComponentWithState from './components/greet/GreetClassComponentWithState.js';
 import GreetClassComponentWithProps from './components/greet/GreetClassComponentWithProps.js';
 import GreetClassComponentWithPropTypes from './components/greet/GreetClassComponentWithPropTypes.js';
+import TodoApp from './components/todo/TodoApp.js';
+import TodoAppRouter from './components/todo/TodoAppRouter.js';
 
 
 function App() {
 
   return (
     <div className="App">
+      <TodoAppRouter/>
+      
+      {/* 
+      <TodoApp/>
       <header className="App-header">
         <MenuSimpleComponent/>
         <MenuComponentWithProps connected={true}/>
@@ -34,6 +40,7 @@ function App() {
           Learn React
         </a>
       </header>
+      */}
     </div>
   );
 }
