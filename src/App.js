@@ -7,13 +7,14 @@ import GreetClassComponentWithProps from './components/greet/GreetClassComponent
 import GreetClassComponentWithPropTypes from './components/greet/GreetClassComponentWithPropTypes.js';
 import TodoApp from './components/todo/TodoApp.js';
 import TodoAppRouter from './components/todo/TodoAppRouter.js';
-
+import TodoAppList from './components/todo/TodoAppList.js';
+import './bootstrap/bootstrap.css';
 
 function App() {
 
   return (
     <div className="App">
-      <TodoAppRouter/>
+      <TodoAppList/>
       
       {/* 
       <TodoApp/>
