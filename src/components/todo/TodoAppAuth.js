@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import {BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import './TodoApp.css'
 import AuthenticationService from './AuthenticationService.js'
-import { Redirect, withRouter } from 'react-router';
+import { Redirect, withRouter } from 'react-router'
+import axios from 'axios'
 
 class TodoAppAuth extends Component {
 
@@ -98,7 +99,7 @@ class HeaderComponent extends Component {
                 <nav className="navbar navbar-expand-md navbar-dark bg-primary">
                     <div><a className="navbar-brand" href="/">My-App</a></div>
                     <ul className="navbar-nav">
-                        {isUserLogged && <li><Link className="nav-item nav-link" to="/welcome">Accueil</Link></li>}
+                        {isUserLogged && <li><Link className="nav-item nav-link" to="/welcome/jekoboki">Accueil</Link></li>}
                         {isUserLogged && <li><Link className="nav-item nav-link" to="/tasks">Tâches</Link></li>}
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">
@@ -132,12 +133,44 @@ class FooterComponent extends Component {
 }
 
 class WelcomeParamComponent extends Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            helloMessage : ''
+        };
+
+        this.handleGetHello = this.handleGetHello.bind(this);
+        this.handleSuccessHello = this.handleSuccessHello.bind(this);
+        this.handleErrorHello = this.handleErrorHello.bind(this);
+    }
+
+    handleSuccessHello(response){
+        this.setState({
+            helloMessage : response.data
+        });
+    }
+    
+    handleErrorHello(error){
+        console.log(error);
+    }
+
+    handleGetHello(){
+        axios.get('http://localhost:8080/hello-world')
+            .then(response => this.handleSuccessHello(response))
+            .catch(error => this.handleErrorHello(error));
+    }
+
     render (){
         return (
             <div className="container">
                 <h1>Welcome to Kapsiki dear {this.props.match.params.loginname}. </h1>
                 <div>Your tasks <a href="/tasks">here_ahref</a></div>
                 <div>Your tasks <Link to="/tasks">here_Link</Link></div>
+                <div className="container">
+                    <button onClick={this.handleGetHello} className="btn btn-success">Get Hello From Spring Boot</button>
+                </div>
+                <div>{this.state.helloMessage}</div>
             </div>
         )
     }  
