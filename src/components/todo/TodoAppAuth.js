@@ -141,7 +141,9 @@ class WelcomeParamComponent extends Component {
         };
 
         this.handleGetHello = this.handleGetHello.bind(this);
+        this.handleGetHelloBean = this.handleGetHelloBean.bind(this);
         this.handleSuccessHello = this.handleSuccessHello.bind(this);
+        this.handleSuccessHelloBean = this.handleSuccessHelloBean.bind(this);
         this.handleErrorHello = this.handleErrorHello.bind(this);
     }
 
@@ -150,7 +152,13 @@ class WelcomeParamComponent extends Component {
             helloMessage : response.data
         });
     }
-    
+
+    handleSuccessHelloBean(response){
+        this.setState({
+            helloMessage : response.data.message
+        });
+    }
+
     handleErrorHello(error){
         console.log(error);
     }
@@ -161,6 +169,11 @@ class WelcomeParamComponent extends Component {
             .catch(error => this.handleErrorHello(error));
     }
 
+    handleGetHelloBean(){
+        axios.get('http://localhost:8080/hello-world-bean')
+            .then(response => this.handleSuccessHelloBean(response))
+            .catch(error => this.handleErrorHello(error));
+    }
     render (){
         return (
             <div className="container">
@@ -169,6 +182,9 @@ class WelcomeParamComponent extends Component {
                 <div>Your tasks <Link to="/tasks">here_Link</Link></div>
                 <div className="container">
                     <button onClick={this.handleGetHello} className="btn btn-success">Get Hello From Spring Boot</button>
+                </div>
+                <div className="container">
+                    <button onClick={this.handleGetHelloBean} className="btn btn-success">Get Hello From Spring Boot Bean</button>
                 </div>
                 <div>{this.state.helloMessage}</div>
             </div>
