@@ -9,13 +9,14 @@ import TodoApp from './components/todo/TodoApp.js';
 import TodoAppRouter from './components/todo/TodoAppRouter.js';
 import TodoAppList from './components/todo/TodoAppList.js';
 import TodoAppAuth from './components/todo/TodoAppAuth.js';
+import TodoAppRest from './components/todo/TodoAppRest.js';
 import './bootstrap/bootstrap.css';
 
 function App() {
 
   return (
     <div className="App">
-      <TodoAppAuth/>
+      <TodoAppRest/>
       
       {/* 
       <TodoApp/>
